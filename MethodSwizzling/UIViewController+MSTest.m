@@ -14,21 +14,29 @@
 + (void)load
 {
     swizzlingMethod([self class], @selector(viewDidAppear:), @selector(swizzling_viewDidAppear:));
+   // NSLog(@"%s",@selector(viewDidAppear:));
 }
 - (void)swizzling_viewDidAppear:(BOOL)animated
 {
     [self swizzling_viewDidAppear:animated];
-    NSLog(@"view did appeared!!!!");
+   
+    NSLog(@"log::view did appeared!!!!");
 }
 void swizzlingMethod(Class class ,SEL orignal, SEL swizziled)
 {
-   Method origanlMethod =  class_getInstanceMethod(class, orignal);
+    Method origanlMethod =  class_getInstanceMethod(class, orignal);
     Method swizziledMethod = class_getInstanceMethod(class, swizziled);
     BOOL didAddMethod = class_addMethod(class, orignal, method_getImplementation(swizziledMethod), method_getTypeEncoding(swizziledMethod));
+    /*
+     if not exist then replace the implement 
+     */
     if(didAddMethod)
     {
         class_replaceMethod(class, swizziled, method_getImplementation(origanlMethod), method_getTypeEncoding(origanlMethod));
     }
+    /*
+     is exist then exchange the implement
+     */
     else {
         method_exchangeImplementations(origanlMethod, swizziledMethod);
     }

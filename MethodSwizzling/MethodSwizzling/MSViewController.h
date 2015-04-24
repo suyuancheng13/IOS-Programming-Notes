@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIViewController+MSTest.h"
+//#import "UIViewController+MSTest.h"
 
 @interface MSViewController : UIViewController
-
+@property (readonly)NSString *extensionTest;
 @end

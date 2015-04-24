@@ -9,15 +9,18 @@
 #import "MSViewController.h"
 
 @interface MSViewController ()
-
+//@property(readwrite)NSString *extensionTest;
 @end
 
 @implementation MSViewController
+@synthesize extensionTest;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    extensionTest = @"test";
+    
 }
 
 - (void)viewDidUnload
